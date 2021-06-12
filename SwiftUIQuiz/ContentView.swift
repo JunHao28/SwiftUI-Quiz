@@ -27,7 +27,8 @@ struct ContentView: View {
                               option1: "2 only",
                               option2: "Depends but can eat a lot",
                               option3: "100",
-                              option4: "Cannot eat")]
+                              option4: "Cannot eat"),
+    Question(title: "Did Jia Chen sleep last night?", option1: "Yes", option2: "No", option3: "IDK", option4: "Maybe")]
     @State private var questionNumber = 0
     @State private var alertShown = false
     @State private var alertPositive = true
