@@ -9,26 +9,35 @@ import SwiftUI
 
 struct ContentView: View {
     var questions = [Question(title: "When is WWDC?",
-                              option1: "Some time on the future :D",
+                              option1: "It has passed",
                               option2: "7th June",
                               option3: "Tommorrow",
-                              option4: "Next Saturday"),
+                              option4: "Next Saturday",
+                              correctAnswer: 1),
                      Question(title: "What framework are we using?",
                               option1: "UIKit",
                               option2: "SwiftUI",
                               option3: "React Native",
-                              option4: "Flutter"),
+                              option4: "Flutter",
+                              correctAnswer: 2),
                      Question(title: "Which company created Swift?",
                               option1: "Orange",
                               option2: "Apple",
                               option3: "Google",
-                              option4: "Tinkercademy"),
+                              option4: "Tinkercademy",
+                              correctAnswer: 2),
                      Question(title: "How many jars of nutella can YJ eat",
                               option1: "2 only",
                               option2: "Depends but can eat a lot",
                               option3: "100",
-                              option4: "Cannot eat"),
-    Question(title: "Did Jia Chen sleep last night?", option1: "Yes", option2: "No", option3: "IDK", option4: "Maybe")]
+                              option4: "Cannot eat",
+                              correctAnswer: 2),
+                     Question(title: "Did Jia Chen sleep last night?",
+                              option1: "Yes",
+                              option2: "No",
+                              option3: "IDK",
+                              option4: "Maybe",
+                              correctAnswer: 2)]
     @State private var questionNumber = 0
     @State private var alertShown = false
     @State private var alertPositive = true
@@ -44,6 +53,14 @@ struct ContentView: View {
     fileprivate func nextQuestion() {
         alertShown = true
         answeringQuestion = false
+    }
+    fileprivate func checkAnswer(answer: Int) {
+        if answer == questions[questionNumber].correctAnswer {
+            alertPositive = true
+            numberOfCorrectQuestions += 1
+        } else {
+            alertPositive = false
+        }
     }
     
     var body: some View {
@@ -68,10 +85,7 @@ struct ContentView: View {
                 VStack {
                     Button(action: {
                         nextQuestion()
-                        alertPositive = false
-                        if (questionNumber == 0){
-                            numberOfCorrectQuestions = 0
-                        }
+                        checkAnswer(answer: 1)
                     }){
                         HStack {
                             Image(systemName: "triangle.fill")
@@ -86,13 +100,7 @@ struct ContentView: View {
                     .padding(1.0)
                     Button(action: {
                         nextQuestion()
-                        alertPositive = true
-                        if (questionNumber == 0){
-                            numberOfCorrectQuestions = 1
-                        } else {
-                            numberOfCorrectQuestions += 1
-                        }
-                        
+                        checkAnswer(answer: 2)
                     }) {
                         HStack {
                             Image(systemName: "circle.fill")
@@ -111,10 +119,7 @@ struct ContentView: View {
                 VStack {
                     Button(action: {
                         nextQuestion()
-                        alertPositive = false
-                        if (questionNumber == 0){
-                            numberOfCorrectQuestions = 0
-                        }
+                        checkAnswer(answer: 3)
                     }) {
                         HStack {
                             Image(systemName: "diamond.fill")
@@ -130,10 +135,7 @@ struct ContentView: View {
                     .padding(1.0)
                     Button(action: {
                         nextQuestion()
-                        alertPositive = false
-                        if (questionNumber == 0){
-                            numberOfCorrectQuestions = 0
-                        }
+                        checkAnswer(answer: 4)
                     }) {
                         HStack {
                             Image(systemName: "square.fill")
@@ -179,7 +181,11 @@ struct ContentView: View {
                 }}
         }
         .padding(5.0)
-        .sheet(isPresented: $showScore) {
+        .sheet(isPresented: $showScore, onDismiss: {
+            numberOfCorrectQuestions = 0
+            timeRemaining = 20
+            answeringQuestion = true
+        }) {
             if (numberOfCorrectQuestions >= questions.count/2) {
                 ScoreSheet(pass: true, score: numberOfCorrectQuestions, totalNumberOfQn: questions.count)
                 

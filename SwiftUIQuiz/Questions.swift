@@ -13,4 +13,5 @@ struct Question {
     var option2: String
     var option3: String
     var option4: String
+    var correctAnswer: Int
 }
