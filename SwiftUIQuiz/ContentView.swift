@@ -94,6 +94,7 @@ struct ContentView: View {
                             Text(questions[questionNumber].option1)
                                 .fontWeight(.semibold)
                         }
+                        .padding(.horizontal, 20)
                     }
                     .frame(minWidth: 0, maxWidth: 300, minHeight: 0, maxHeight: 50)
                     .foregroundColor(.white)
@@ -109,6 +110,7 @@ struct ContentView: View {
                             Text(questions[questionNumber].option2)
                                 .fontWeight(.semibold)
                         }
+                        .padding(.horizontal, 20)
                     }
                     .multilineTextAlignment(.leading)
                     .frame(minWidth: 0, maxWidth: 300, minHeight: 0, maxHeight: 50)
@@ -128,6 +130,7 @@ struct ContentView: View {
                             Text(questions[questionNumber].option3)
                                 .fontWeight(.semibold)
                         }
+                        .padding(.horizontal, 20)
                     }
                     .multilineTextAlignment(.leading)
                     .frame(minWidth: 0, maxWidth: 300, minHeight: 0, maxHeight: 50)
@@ -144,6 +147,7 @@ struct ContentView: View {
                             Text(questions[questionNumber].option4)
                                 .fontWeight(.semibold)
                         }
+                        .padding(.horizontal, 20)
                     }
                     .multilineTextAlignment(.leading)
                     .frame(minWidth: 0, maxWidth: 300, minHeight: 0, maxHeight: 50)
