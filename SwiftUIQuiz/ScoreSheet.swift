@@ -18,14 +18,16 @@ struct ScoreSheet: View {
             Image(pass ? "happy" : "sad")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-            Text(pass ? "Pass!" : "Fail!")
+            Text(pass ? "You got \(score)/\(totalNumberOfQn)! Pass!🎉🎉🎉" : "You got \(score)/\(totalNumberOfQn)! Fail!")
                 .font(.title)
                 .fontWeight(.bold)
                 .padding()
-            Text("You got \(score)/\(totalNumberOfQn)")
-            Text(pass ? "Hurray! You managed to pass the test! Here's a bubble tea for you! 🧋" : "Haiya... How can you fail the test! No bubble tea for you!")
-                .multilineTextAlignment(.center)
+            CircularProgressView(progress: CGFloat(score) / CGFloat(totalNumberOfQn))
+                            .frame(width: 90, height: 90)
                 .padding()
+//            Text(pass ? "Hurray! You managed to pass the test! Here's a bubble tea for you! 🧋" : "Haiya... How can you fail the test! No bubble tea for you!")
+//                .multilineTextAlignment(.center)
+//                .padding()
             Button("Dismiss Me") {
                 presentationMode.wrappedValue.dismiss()
             }
@@ -39,7 +41,7 @@ struct ScoreSheet: View {
 
 struct ScoreSheet_Previews: PreviewProvider {
     static var previews: some View {
-        ScoreSheet(pass: true, score: 2, totalNumberOfQn: 3)
-        ScoreSheet(pass: false, score: 2, totalNumberOfQn: 3)
+        ScoreSheet(pass: true, score: 4, totalNumberOfQn: 5)
+        ScoreSheet(pass: false, score: 2, totalNumberOfQn: 5)
     }
 }

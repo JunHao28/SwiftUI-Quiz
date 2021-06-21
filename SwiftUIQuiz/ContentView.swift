@@ -43,6 +43,7 @@ struct ContentView: View {
     @State private var alertPositive = true
     @State private var numberOfCorrectQuestions = 0
     @State private var showScore = false
+    @State var progressValue: Float = 0.0
     
     @State private var timeRemaining = 20
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -70,6 +71,7 @@ struct ContentView: View {
                 .fontWeight(.bold)
                 .multilineTextAlignment(.leading)
                 .padding(.trailing, 100.0)
+            StraightProgressView(totalQuestions: questions.count, currentQuestions: questionNumber+1)
             Spacer()
                 .frame(height: 100)
             Text("\(timeRemaining)")
@@ -157,6 +159,7 @@ struct ContentView: View {
                     message: Text(alertPositive ? "Congrats! You are kinda smart" : "This is outrageous! Such an easy question and you can still get it wrong? What's wrong with you?"),
                     dismissButton: .default(Text(alertPositive ? "Yay!" : "Sorry!")){
                         questionNumber += 1
+                        progressValue += 1
                         if (questionNumber == questions.count){
                             showScore = true
                             questionNumber = 0
